@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,7 +24,7 @@ model User {
 model Restaurant {
   id      Int     @id @default(autoincrement())
   name    String
-  address String
+  address String  @db.Text
   type    String?
 
   products Product[]
@@ -48,23 +48,23 @@ model Order {
 
   products OrderOfProducts[]
 
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
   id          Int     @id @default(autoincrement())
   name        String
   price       Float
-  description String?
+  description String? @db.Text
 
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   restaurantId Int
 
   orders OrderOfProducts[]
 
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model OrderOfProducts {
@@ -78,18 +78,24 @@ model OrderOfProducts {
   productId Int
 
   assignedAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model Delivery {
-  id           Int       @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   deliveryDate DateTime?
-  status       String    @default("IN_PROGRESS")
-  address      String
+  status       DeliveryStatus @default(IN_PROGRESS)
+  address      String @db.Text
 
   order   Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId Int   @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum DeliveryStatus {
+  IN_PROGRESS
+  DELIVERED
+  CANCELED
 }

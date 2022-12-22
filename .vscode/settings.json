@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "Docker DB",
+            "database": "food_delivery",
+            "username": "root",
+            "password": "pa55w0rd!"
+        }
+    ]
+}
