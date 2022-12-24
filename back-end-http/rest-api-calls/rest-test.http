@@ -1,11 +1,11 @@
 GET http://localhost:4100
 
-###
+### Test
 
 GET http://localhost:4100/test
 Content-Type: application/json
 
-###
+### POST
 
 POST http://localhost:4100/test2
 Content-Type: application/json

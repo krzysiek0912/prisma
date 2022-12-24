@@ -1,11 +1,22 @@
 import http from 'http'
-
+import { jsonBodyParserMiddleware } from './middleware/json-body-parser.middleware.js'
+import { urlParserMiddleware } from './middleware/url-parser.middleware.js'
+import { handleRequest } from './handleRequest.js'
 const { PORT = 3000 } = process.env
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.write(JSON.stringify({ hello: 'world', request: req.url }))
-  res.end()
+const server = http.createServer(async (req, res) => {
+  urlParserMiddleware(req)
+  try {
+    await jsonBodyParserMiddleware(req)
+    const body = await handleRequest(req, res)
+    res.setHeader('Content-Type', 'application/json')
+    res.write(JSON.stringify(body))
+    res.end()
+  } catch ({ message }) {
+    res.statusCode = 500
+    res.write(JSON.stringify({ message }))
+    res.end()
+  }
 })
 
 server.listen(PORT, () => {
@@ -28,4 +39,9 @@ server.listen(PORT, () => {
 
 server.on('listening', () => {
   console.log('Server listening on port ' + server.address().port)
+})
+
+process.on('uncaughtException', (err) => {
+  console.log('uncaughtException')
+  console.log(err)
 })
