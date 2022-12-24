@@ -10,7 +10,8 @@
     "lint": "eslint src --fix",
     "pretty": "prettier src --write",
     "lint-and-pretty": "npm run lint && npm run pretty",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "seed": "prisma db seed"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
@@ -22,5 +23,8 @@
   },
   "dependencies": {
     "@prisma/client": "^4.8.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
