@@ -22,7 +22,8 @@
     "prisma": "^4.8.0"
   },
   "dependencies": {
-    "@prisma/client": "^4.8.0"
+    "@prisma/client": "^4.8.0",
+    "bcryptjs": "^2.4.3"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
