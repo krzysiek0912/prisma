@@ -1,7 +1,8 @@
-GET http://localhost:4100/user/sign-in
+
+POST http://localhost:4100/user/sign-in
 Content-Type: application/json
 
 {
     "email": "user@example.com",
-    "password": "password",
+    "password": "password"
 }
