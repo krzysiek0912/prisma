@@ -14,7 +14,7 @@ GET http://localhost:4100/restaurants
 GET http://localhost:4100/restaurants?page=1&count=100
 
 ### Read Restaurant with id: 1
-GET http://localhost:4100/restaurants/1
+GET http://localhost:4100/restaurants/125
 
 ### Update Restaurant PATCH / PUT
 PATCH http://localhost:4100/restaurants/1

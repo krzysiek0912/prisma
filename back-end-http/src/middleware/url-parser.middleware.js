@@ -3,5 +3,5 @@ export const urlParserMiddleware = (req) => {
   const [, resource, identifier] = myURL.pathname.split('/')
   req.query = Object.fromEntries(myURL.searchParams.entries())
   req.resource = resource
-  req.identifier = identifier
+  req.id = identifier
 }

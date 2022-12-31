@@ -2,7 +2,8 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export const getRestaurants = async ({ id, query }) => {
+export const getRestaurants = async (req) => {
+  const { id, query } = req
   if (id) {
     return prisma.restaurant.findFirstOrThrow({
       where: {
